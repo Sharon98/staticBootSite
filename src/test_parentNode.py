@@ -3,7 +3,7 @@ import unittest
 from htmlnode import ParentNode, LeafNode
 
 class TestParentNode(unittest.TestCase):
-    def test_link_eq(self):
+    def test_block1_eq(self):
         node = ParentNode("p",
             [
                 LeafNode("b", "Bold text"),

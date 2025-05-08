@@ -50,7 +50,7 @@ class ParentNode(HTMLNode):
             raise ValueError("Tags are required")
         if self.children == None:
             raise ValueError("Children are required")
-        # return f"<{self.tag}{self.props_to_html()}>{list(map(lambda node: node.children.to_html(),self.children))}</{self.tag}>"
-        return f"<{self.tag}{self.props_to_html()}>{self.children.to_html()}</{self.tag}>"
+        return f"<{self.tag}{self.props_to_html()}>{ ("").join(list(map(lambda node: node.to_html(),self.children)))}</{self.tag}>"
+        # return f"<{self.tag}{self.props_to_html()}>{self.children.to_html()}</{self.tag}>"
             
             
