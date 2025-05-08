@@ -1,5 +1,5 @@
 import unittest
-
+from textnode import TextType
 from htmlnode import HTMLNode
 
 class TestHTMLNode(unittest.TestCase):
@@ -50,6 +50,7 @@ class TestHTMLNode(unittest.TestCase):
     #     node = HTMLNode("This is a text node", TextType.BOLD,"http:/yahoo.com")
     #     node2 = HTMLNode("This is a text node",TextType.BOLD,"http:/yahoo.com")
     #     self.assertEqual(node, node2)
+
 
 if __name__ == "__main__":
     unittest.main()

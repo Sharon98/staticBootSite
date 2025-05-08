@@ -1,6 +1,29 @@
 import unittest
+import textnode
+# from textnode import TextNode
+from textnode import TextType
+from htmlnode import LeafNode 
+from htmlnode import HTMLNode
 
-from htmlnode import LeafNode
+
+def text_node_to_html_node(text_node):  
+    tt = text_node.text_type 
+    match tt:
+        case TextType.TEXT: 
+            return LeafNode(None,text_node.text)
+        case textnode.TextType.BOLD:
+            return LeafNode("b",text_node.text)
+        case textnode.TextType.ITALIC:
+            return LeafNode("i",text_node.text)
+        case textnode.TextType.CODE: 
+            return LeafNode("code",text_node.text)
+        case textnode.TextType.LINK: 
+            return LeafNode("a",text_node.text, {"href":text_node.url})
+        case textnode.TextType.IMAGE:
+            return LeafNode("img",None, {"src":text_node.url, "alt": text_node.text})
+        case _:                
+            raise Exception("bad") 
+
 
 class TestLeafNode(unittest.TestCase):
     def test_leaf_to_html_p(self):
@@ -24,6 +47,12 @@ class TestLeafNode(unittest.TestCase):
         # print(node)
         # print(node2)
         self.assertEqual(node.to_html(),'<a href="https://www.google.com" target="_blank">happy</a>')
+    
+    def test_text(self):
+        node = textnode.TextNode("This is a text node", TextType.TEXT)
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, None)
+        self.assertEqual(html_node.value, "This is a text node")        
     '''
     def test_props_link(self):
         node  = LeafNode("a","happy",None,{"href": "https://www.google.com","target": "_blank"})
